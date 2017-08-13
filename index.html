@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Local Map Project</title>
+    <script type='text/javascript' src='knockout-3.4.2.js'></script>
+    <style>
+      html, body {
+        height: 100%;
+      }
+      #map {
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var indianapolisCenter = {lat: 39.775226, lng: -86.157846};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+          center: indianapolisCenter
+        });
+        var marker = new google.maps.Marker({
+          position: indianapolisCenter,
+          map: map
+        });
+      }
+    </script>
+  </body>
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArB9ZBRQbYtuiFSZJzOroi8HDxI55N0hU&callback=initMap"></script>
+</html>
