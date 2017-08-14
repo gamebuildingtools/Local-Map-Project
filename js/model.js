@@ -1,4 +1,11 @@
-var myLocations = [
+var locations = [];
+
+locations.startingPlace = {
+  lat: 39.772945,
+  lng: -86.151869
+}
+
+locations.myPlaces = [
   {
     title: "Rathskellar",
     address: "401 E Michigan St, Indianapolis, IN 46204"
