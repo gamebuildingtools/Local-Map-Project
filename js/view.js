@@ -26,30 +26,6 @@ function populateInfoWindow(marker, infowindow) {
   }
 }
 
-function ViewModel(){
-  /*var self = this;
-  this.filter = ko.observable();
-  var myLocations = [];
-
-  locations.myPlaces.forEach(function(location, index) {
-    myLocations.push(location);
-  });
-
-  this.places = ko.observableArray(myLocations);
-
-  this.myPlaces = ko.computed(function(){
-    return this.places().filter(function(place){
-      if(!self.filter() || place.title.toLowerCase().indexOf(self.filter().toLowerCase()) !== -1) {
-        console.log( place.title.toLowerCase() );
-        return place;
-      }
-    });
-  }, this);*/
-
-}
-
-//ko.applyBindings(new ViewModel());
-
 function DisplayLocations() {
 
   var self = this;
@@ -80,11 +56,39 @@ function DisplayLocations() {
     });
   });
 
+  // Function to hide listings
+  function hideListings() {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(null);
+      markers[i].isVisible = false;
+    }
+  }
+
+  // This function will loop through the markers array and display them all.
+  function showListings(index) {
+    var bounds = new google.maps.LatLngBounds();
+    // Extend the boundaries of the map for each marker and display the marker
+    markers[index].setMap(map);
+    markers[index].isVisible = true;
+
+    for (var i = 0; i < markers.length; i++) {
+      if(markers[i].isVisible === true) {
+        bounds.extend(markers[i].position);
+      }
+    }
+    map.fitBounds(bounds);
+  }
+
   // Create the filter
   this.myPlace = ko.computed(function(){
-    return this.places().filter(function(place){
+
+    hideListings();
+
+    return this.places().filter(function(place, index){
       if(!self.filter() || place.title.toLowerCase().indexOf(self.filter().toLowerCase()) !== -1) {
         //console.log( place.title.toLowerCase() );
+        console.log( "index:" + index );
+        showListings(index);
         return place;
       }
     });
