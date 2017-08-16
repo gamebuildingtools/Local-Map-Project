@@ -13,12 +13,12 @@ Starting template comes from BlackrockDigital at https://github.com/BlackrockDig
     <title>Mass Ave.</title>
 
     <!-- Bootstrap core JavaScript -->
+    <script src="./js/tether.min.js"></script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/popper.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
 
     <!-- Bootstrap core CSS -->
-    <script src="./js/tether.min.js"></script>
     <link href="./css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
@@ -40,15 +40,22 @@ Starting template comes from BlackrockDigital at https://github.com/BlackrockDig
   <main id="wrapper" class="toggled">
 
     <!-- Sidebar -->
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
+    <nav id="sidebar-wrapper" class="container">
+      <div class="row">
+        <div class="col">
+          <label for="filter">Filter:</label>
+          <input id="filter" type="text" data-bind="textInput: filter"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <ul class="sidebar-nav" data-bind="foreach: myPlace">
             <li>
-                <a href="#">Dashboard</a>
+              <a href="#" data-bind="text: title"></a>
             </li>
-            <li>
-                <a href="#">Shortcuts</a>
-            </li>
-        </ul>
+          </ul>
+        </div>
+      </div>
     </nav>
     <!-- /#sidebar-wrapper -->
 
