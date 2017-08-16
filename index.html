@@ -31,8 +31,8 @@ Starting template comes from BlackrockDigital at https://github.com/BlackrockDig
 
   <header class="container-fluid">
     <div class="row">
-      <div class="col">
-        <p><a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Menu</a> Mass Ave.</p>
+      <div class="col" id="header-contents">
+        <h1><a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Menu</a><span id="heading-text">Mass Ave. Location Highlights</span></h1>
       </div>
     </div>
   </header>
@@ -42,9 +42,14 @@ Starting template comes from BlackrockDigital at https://github.com/BlackrockDig
     <!-- Sidebar -->
     <nav id="sidebar-wrapper" class="container">
       <div class="row">
-        <div class="col">
-          <label for="filter">Filter:</label>
+        <div class="col" id="filter-section">
+          <label for="filter">Search For a Location:</label>
           <input id="filter" type="text" data-bind="textInput: filter"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h2 class="top-spacing">Locations</h2>
         </div>
       </div>
       <div class="row">

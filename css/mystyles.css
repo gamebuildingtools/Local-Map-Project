@@ -1,12 +1,46 @@
+/* Global CSS */
+header {
+  color: white;
+  background-color: #46494c;
+  height: 42px;
+  font-size: 18px;
+}
+
+h1 {
+  font-size: 1.4em;
+}
+
+h2 {
+  font-size: 1.3em;
+}
+
+/* Class Styles */
 .fill-height {
   height: 100%;
 }
 
-header {
-  color: white;
-  background-color: #46494c;
-  height: 50px;
-  font-size: 18px;
+.container-fluid {
+  padding: 0;
+}
+
+.top-spacing {
+  padding-top: 0.75em;
+}
+
+/* Individual Elements */
+#header-contents {
+  padding-left: 30px;
+  padding-top: 5px;
+}
+
+#heading-text {
+  padding-left: 20px;
+}
+
+#menu-toggle {
+  padding-top: 0.25rem;
+  padding-bottom: 0;
+  height: 30px;
 }
 
 #map {
@@ -14,6 +48,12 @@ header {
   width: 100%;
 }
 
-.container-fluid {
-  padding: 0;
+#filter-section {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #46494c;
+}
+
+#filter {
+  width: 100%;
 }

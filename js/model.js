@@ -28,7 +28,7 @@ locations.myPlaces = [
     latlng: {lat: 39.771797, lng: -86.153525}
   },
   {
-    title: "Roberts Park Methodist Church",
+    title: "Roberts Park Church",
     address: "401 N Delaware St, Indianapolis, IN 46204",
     latlng: {lat: 39.772951, lng: -86.154218}
   },
