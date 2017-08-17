@@ -43,18 +43,18 @@ Starting template comes from BlackrockDigital at https://github.com/BlackrockDig
     <nav id="sidebar-wrapper" class="container">
       <div class="row">
         <div class="col" id="filter-section">
-          <label for="filter">Search For a Location:</label>
+          <label for="filter" class="left-spacing">Search For a Location:</label>
           <input id="filter" type="text" data-bind="textInput: filter"/>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <h2 class="top-spacing">Locations</h2>
+          <h2 class="top-spacing left-spacing">Locations</h2>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <ul class="sidebar-nav" data-bind="foreach: myPlace">
+          <ul class="sidebar-nav left-spacing" data-bind="foreach: myPlace">
             <li>
               <a href="#" data-bind="text: title, attr: {id: $index() }, click: $parent.locationListClick"></a>
             </li>

@@ -25,9 +25,15 @@ h2 {
   font-size: 1.3em;
 }
 
+
 /* Class Styles */
 .fill-height {
   height: 100%;
+}
+
+.container {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .container-fluid {
@@ -36,6 +42,10 @@ h2 {
 
 .top-spacing {
   padding-top: 0.75em;
+}
+
+.left-spacing {
+  padding-left: 15px;
 }
 
 /* Individual Elements */
@@ -76,5 +86,6 @@ h2 {
 }
 
 #filter {
-  width: 100%;
+  width: 85%;
+  margin-left: 15px;
 }

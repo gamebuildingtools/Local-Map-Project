@@ -110,8 +110,7 @@ function DisplayLocations() {
     $.ajax({
       url: weatherURL,
       dataType: 'json'
-    }).done(function(data){
-      console.log(data);
+    }).done(function(data){      
       marker.weather = "The temperature is " + data.main.temp + " with " + data.clouds.all + "% cloud.";
     }).fail(function(){
       // Weather api call failed
