@@ -56,7 +56,7 @@ Starting template comes from BlackrockDigital at https://github.com/BlackrockDig
         <div class="col">
           <ul class="sidebar-nav" data-bind="foreach: myPlace">
             <li>
-              <a href="#" data-bind="text: title"></a>
+              <a href="#" data-bind="text: title, attr: {id: $index() }, click: $parent.locationClick"></a>
             </li>
           </ul>
         </div>
@@ -85,14 +85,6 @@ Starting template comes from BlackrockDigital at https://github.com/BlackrockDig
   <script type='text/javascript' src='js/view.js'></script>
 
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBvQ2OJlPcOqWXGMwKGLkoBDP96TC1BkLc&callback=initMap"></script>
-
-  <!-- Menu Toggle Script -->
-  <script>
-  $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-  });
-  </script>
 
 </body>
 

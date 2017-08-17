@@ -12,6 +12,12 @@ function initMap() {
 
   // Apply Bindings along with the map init
   ko.applyBindings(new DisplayLocations());
+
+  // Toggle the sidebar menu
+  $("#menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+  });
 }
 
 function populateInfoWindow(marker, infowindow) {
@@ -71,12 +77,12 @@ function DisplayLocations() {
     markers[index].setMap(map);
     markers[index].isVisible = true;
 
-    for (var i = 0; i < markers.length; i++) {
+    /*for (var i = 0; i < markers.length; i++) {
       if(markers[i].isVisible === true) {
         bounds.extend(markers[i].position);
       }
     }
-    map.fitBounds(bounds);
+    map.fitBounds(bounds);*/
   }
 
   // Create the filter
@@ -87,11 +93,15 @@ function DisplayLocations() {
     return this.places().filter(function(place, index){
       if(!self.filter() || place.title.toLowerCase().indexOf(self.filter().toLowerCase()) !== -1) {
         //console.log( place.title.toLowerCase() );
-        console.log( "index:" + index );
+        //console.log( "index:" + index );
         showListings(index);
         return place;
       }
     });
   }, this);
+
+  self.locationClick = function(data, event) {    
+    console.log(event.target.id);
+  }
 
 }
