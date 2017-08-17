@@ -6,6 +6,18 @@ header {
   font-size: 18px;
 }
 
+@media(max-width:455px) {
+  header {
+    font-size: 11px;
+  }
+}
+@media(max-width:360px) {
+  header {
+    font-size: 9px;
+  }
+}
+
+
 h1 {
   font-size: 1.4em;
 }
@@ -13,6 +25,8 @@ h1 {
 h2 {
   font-size: 1.3em;
 }
+
+
 
 /* Class Styles */
 .fill-height {

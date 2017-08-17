@@ -24,9 +24,11 @@ function initMap() {
 }
 
 function populateInfoWindow(marker, infowindow) {
+  
+
   if(infowindow.marker != marker) {
     infowindow.marker = marker;
-    infowindow.setContent('<div>' + marker.title + '<br />' + marker.address + '</div>');
+    //infowindow.setContent('<div>' + marker.title + '<br />' + marker.address + '</div>');
     infowindow.open(map, marker);
 
     infowindow.addListener('closeclick',function(){
@@ -115,13 +117,10 @@ function DisplayLocations() {
     });
   }, this);
 
-  self.locationClick = function(data, event) {
-    console.log(event.target.id);
-    populateInfoWindow(this, largeInfowindow);
+  // Display the information window when a location from the list in sidebar is clicked
+  self.locationListClick = function(data, event) {
+    toggleBounce(markers[event.target.id]);
+    populateInfoWindow(markers[event.target.id], largeInfowindow);
   }
-
-  self.openWindow = function(place){
-        google.maps.event.trigger(place.marker,'click');
-    };
 
 }
