@@ -33,14 +33,14 @@ function populateInfoWindow(marker, infowindow) {
 
     // In case the status is OK, which means the pano was found, compute the
     // position of the streetview image, then calculate the heading, then get a
-    // panorama from that and set the options
+    // panorama from that and set the options, courtesy of Udacity
     function getStreetView(data, status) {
       if (status == google.maps.StreetViewStatus.OK) {
+
         var nearStreetViewLocation = data.location.latLng;
-        console.log(data.location.latLng.lat);
         var heading = google.maps.geometry.spherical.computeHeading(
           nearStreetViewLocation, marker.position);
-          infowindow.setContent('<div id="infoWindowStyle">' + marker.title + ' is located at '+marker.address+'<div id="pano"></div></div>');
+          infowindow.setContent('<div id="infoWindowStyle">' + marker.title + ' is located at ' + marker.address + '. ' + marker.weather + '<div id="pano"></div></div>');
           var panoramaOptions = {
             position: nearStreetViewLocation,
             pov: {
@@ -58,12 +58,14 @@ function populateInfoWindow(marker, infowindow) {
 
     // Use streetview service to get the closest streetview image within 30 meters of the markers position
     streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
+
     // Open the infowindow on the correct marker.
     infowindow.open(map, marker);
 
     infowindow.addListener('closeclick',function(){
       infowindow.marker = null;
     });
+
   }
 }
 
@@ -96,6 +98,24 @@ function DisplayLocations() {
     marker.addListener('click', function() {
       toggleBounce(this);
       populateInfoWindow(this, largeInfowindow);
+    });
+
+    // Store the lat/lng variables
+    var lat = marker.getPosition().lat();
+    var lng = marker.getPosition().lng();
+
+    // Get the local weather via openweathermap.org
+    var weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lng+"&appid=67811cdcf4babdc897c8f34c86df2345&units=imperial";
+    var weatherMessage = "Weather API";
+    $.ajax({
+      url: weatherURL,
+      dataType: 'json'
+    }).done(function(data){
+      console.log(data);
+      marker.weather = "The temperature is " + data.main.temp + " with " + data.clouds.all + "% cloud.";
+    }).fail(function(){
+      // Weather api call failed
+      marker.weather = "The weather API is unavailable";
     });
   });
 
