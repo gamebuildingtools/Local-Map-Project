@@ -10,6 +10,9 @@ function initMap() {
     center: locations.startingPlace
   });
 
+  // Set the max zoom to 20, this helps with filtering to individual locations
+  map.setOptions({maxZoom: 20});
+
   // Apply Bindings along with the map init
   ko.applyBindings(new DisplayLocations());
 
@@ -58,11 +61,24 @@ function DisplayLocations() {
 
     // Add a click event to open the marker
     marker.addListener('click', function() {
+      toggleBounce(this);
       populateInfoWindow(this, largeInfowindow);
     });
   });
 
-  // Function to hide listings
+  // Bounce an individual marker and cancel bounce after two bounces
+  function toggleBounce(marker) {
+    if (marker.getAnimation() !== null) {
+      marker.setAnimation(null);
+    } else {
+      setTimeout(function(){
+          marker.setAnimation(null);
+      },1475);
+      marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+  }
+
+  // Function to hide all markers
   function hideListings() {
     for (var i = 0; i < markers.length; i++) {
       markers[i].setMap(null);
@@ -70,38 +86,42 @@ function DisplayLocations() {
     }
   }
 
-  // This function will loop through the markers array and display them all.
-  function showListings(index) {
+  // This function will loop through the markers array and display the specified index marker
+  function showListing(index) {
     var bounds = new google.maps.LatLngBounds();
     // Extend the boundaries of the map for each marker and display the marker
     markers[index].setMap(map);
     markers[index].isVisible = true;
 
-    /*for (var i = 0; i < markers.length; i++) {
+    // Update the map bounds based on current list of locations
+    for (var i = 0; i < markers.length; i++) {
       if(markers[i].isVisible === true) {
         bounds.extend(markers[i].position);
       }
     }
-    map.fitBounds(bounds);*/
+    map.fitBounds(bounds);
+
   }
 
-  // Create the filter
+  // Create the filter, I had some help from StackOverflow for this function
   this.myPlace = ko.computed(function(){
-
     hideListings();
 
     return this.places().filter(function(place, index){
       if(!self.filter() || place.title.toLowerCase().indexOf(self.filter().toLowerCase()) !== -1) {
-        //console.log( place.title.toLowerCase() );
-        //console.log( "index:" + index );
-        showListings(index);
+        showListing(index);
         return place;
       }
     });
   }, this);
 
-  self.locationClick = function(data, event) {    
+  self.locationClick = function(data, event) {
     console.log(event.target.id);
+    populateInfoWindow(this, largeInfowindow);
   }
+
+  self.openWindow = function(place){
+        google.maps.event.trigger(place.marker,'click');
+    };
 
 }
