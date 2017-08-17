@@ -15,4 +15,5 @@ This project utilizes a few different technologies that include:
 ## FAQ
 
 Q: Why are the locations hard-coded into model.js?
+
 A: The ideal situation would be to connect this app to a database to pull a list of locations. For simplicity, the locations were hard-coded into model.js.
