@@ -104,13 +104,13 @@ function DisplayLocations() {
     var lat = marker.getPosition().lat();
     var lng = marker.getPosition().lng();
 
-    // Get the local weather via openweathermap.org
+    // Get the local weather via openweathermap.org. Do this when the markers are created to prepare it for display
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lng+"&appid=67811cdcf4babdc897c8f34c86df2345&units=imperial";
     var weatherMessage = "Weather API";
     $.ajax({
       url: weatherURL,
       dataType: 'json'
-    }).done(function(data){      
+    }).done(function(data){
       marker.weather = "The temperature is " + data.main.temp + " with " + data.clouds.all + "% cloud.";
     }).fail(function(){
       // Weather api call failed
