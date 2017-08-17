@@ -23,12 +23,42 @@ function initMap() {
   });
 }
 
+// Display information inside the popup on each marker
 function populateInfoWindow(marker, infowindow) {
-  
-
   if(infowindow.marker != marker) {
-    infowindow.marker = marker;
-    //infowindow.setContent('<div>' + marker.title + '<br />' + marker.address + '</div>');
+
+    var windowContent = "";
+    var streetViewService = new google.maps.StreetViewService();
+    var radius = 40;
+
+    // In case the status is OK, which means the pano was found, compute the
+    // position of the streetview image, then calculate the heading, then get a
+    // panorama from that and set the options
+    function getStreetView(data, status) {
+      if (status == google.maps.StreetViewStatus.OK) {
+        var nearStreetViewLocation = data.location.latLng;
+        console.log(data.location.latLng.lat);
+        var heading = google.maps.geometry.spherical.computeHeading(
+          nearStreetViewLocation, marker.position);
+          infowindow.setContent('<div id="infoWindowStyle">' + marker.title + ' is located at '+marker.address+'<div id="pano"></div></div>');
+          var panoramaOptions = {
+            position: nearStreetViewLocation,
+            pov: {
+              heading: heading,
+              pitch: 0
+            }
+          };
+        var panorama = new google.maps.StreetViewPanorama(
+        document.getElementById('pano'), panoramaOptions);
+      } else {
+        infowindow.setContent('<div>' + marker.title + '</div>' +
+          '<div>No Street View Found</div>');
+      }
+    }
+
+    // Use streetview service to get the closest streetview image within 30 meters of the markers position
+    streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
+    // Open the infowindow on the correct marker.
     infowindow.open(map, marker);
 
     infowindow.addListener('closeclick',function(){
@@ -37,6 +67,7 @@ function populateInfoWindow(marker, infowindow) {
   }
 }
 
+// Display the locations on the map
 function DisplayLocations() {
 
   var self = this;
@@ -51,7 +82,7 @@ function DisplayLocations() {
 
     // Create a marker for each location
     var marker = new google.maps.Marker({
-      position: location.latlng,
+      position: location.location, // this contains the lat/lng coordinates
       map: map,
       title: location.title,
       address: location.address,
