@@ -23,6 +23,11 @@ function initMap() {
   });
 }
 
+// Display error in case Google Map doesn't load
+function mapError(){
+  document.getElementById('map').innerHTML = "<h1>Unfortunately, we were unable to load a map for you at this time. Please try again later.</h1>";
+}
+
 // Display information inside the popup on each marker
 function populateInfoWindow(marker, infowindow) {
   if(infowindow.marker != marker) {
