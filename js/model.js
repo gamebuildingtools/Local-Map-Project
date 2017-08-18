@@ -3,7 +3,7 @@ var locations = [];
 locations.startingPlace = {
   lat: 39.772945,
   lng: -86.151869
-}
+};
 
 // This information would preferably come from a server.
 locations.myPlaces = [
